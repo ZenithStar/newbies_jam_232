@@ -1,7 +1,6 @@
 class_name RTSController extends Camera2D
 
 @export var scroll_speed: float = 400
-@export var zoom_speed: float = 2.0 ** (1.0 / 20.0)
 func _ready():
 	get_window().focus_entered.connect(enable)
 	get_window().focus_exited.connect(disable)
@@ -14,11 +13,10 @@ func paused_handler(pause_state: bool):
 		enable()
 func enable():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-	print( "Mouse confined to viewport: ", get_viewport().size )
-	
 func disable():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
+@export var zoom_speed: float = 2.0 ** (1.0 / 20.0)
 @export var zoom_ease_duration = 0.25
 @onready var zoom_setpoint: Vector2 = zoom:
 	get:
@@ -36,6 +34,21 @@ func zoom_to_mouse(zoom_change: float):
 
 var selection_box_class: PackedScene = preload("res://prefabs/selection_box.tscn")
 @onready var active_selection_box: SelectionBox = null
+@onready var active_selection: Array[Node2D] = []:
+	get:
+		return active_selection
+	set(new_value):
+		for body in active_selection:
+			if not body in new_value:
+				var selectable: Selectable = body.find_child("Selectable")
+				if selectable:
+					selectable.selected = false
+		for body in new_value:
+			var selectable: Selectable = body.find_child("Selectable")
+			if selectable:
+				selectable.selected = true
+		active_selection = new_value
+@onready var unit_groups: Dictionary = {}
 # LMB drag behavior
 func init_selection_box(pinned_corner: Vector2 = get_global_mouse_position()):
 	var box: SelectionBox = selection_box_class.instantiate()
@@ -43,10 +56,7 @@ func init_selection_box(pinned_corner: Vector2 = get_global_mouse_position()):
 	add_sibling(box)
 	active_selection_box = box
 func complete_selection():
-	for body in active_selection_box.get_overlapping_bodies():
-		var selectable: Selectable = body.find_child("Selectable")
-		if selectable:
-			selectable.selected = !selectable.selected
+	active_selection = active_selection_box.get_overlapping_bodies()
 	active_selection_box.queue_free()
 	active_selection_box = null
 func _unhandled_input(event):
