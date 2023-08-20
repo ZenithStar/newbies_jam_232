@@ -1,16 +1,18 @@
 extends CanvasLayer
 
+signal paused(bool)
 func _ready():
 	unpause()
-	#get_tree().root.process_mode = Node.PROCESS_MODE_ALWAYS
 
 func pause():
 	visible = true
 	get_tree().paused = true
+	paused.emit(true)
 	
 func unpause():
 	visible = false
 	get_tree().paused = false
+	paused.emit(false)
 
 func _unhandled_input(event):
 	if event.is_action("toggle_pause"):

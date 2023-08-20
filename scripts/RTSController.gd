@@ -6,10 +6,16 @@ func _ready():
 	get_window().focus_entered.connect(enable)
 	get_window().focus_exited.connect(disable)
 	enable()
-
+	PauseMenu.paused.connect(paused_handler)
+func paused_handler(pause_state: bool):
+	if pause_state:
+		disable()
+	else:
+		enable()
 func enable():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	print( "Mouse confined to viewport: ", get_viewport().size )
+	
 func disable():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	

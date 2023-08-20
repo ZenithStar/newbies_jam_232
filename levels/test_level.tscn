@@ -10,7 +10,6 @@ size = Vector2(128, 128)
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(555, 291)
 
 [node name="Icon" type="Sprite2D" parent="CharacterBody2D"]
 use_parent_material = true
