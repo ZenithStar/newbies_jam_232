@@ -1,9 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://lqh8kxojq588"]
+[gd_scene load_steps=5 format=3 uid="uid://lqh8kxojq588"]
 
 [ext_resource type="Texture2D" uid="uid://css7i88if1rcx" path="res://icon.svg" id="1_jsfo4"]
+[ext_resource type="Script" path="res://scripts/RTSController.gd" id="1_mrgxa"]
+[ext_resource type="Script" path="res://scripts/Selectable.gd" id="3_s81ya"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxlq8"]
+size = Vector2(128, 128)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(555, 291)
+
+[node name="Icon" type="Sprite2D" parent="CharacterBody2D"]
+use_parent_material = true
 texture = ExtResource("1_jsfo4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_cxlq8")
+
+[node name="Selectable" type="Node" parent="CharacterBody2D"]
+script = ExtResource("3_s81ya")
+
+[node name="RTSController" type="Camera2D" parent="."]
+script = ExtResource("1_mrgxa")
