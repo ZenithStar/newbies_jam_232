@@ -59,6 +59,17 @@ func complete_selection():
 	active_selection = active_selection_box.get_overlapping_bodies()
 	active_selection_box.queue_free()
 	active_selection_box = null
+	
+@onready var active_command: String = ""
+
+
+func placeholder_rmb_behavior():
+	for node in active_selection:
+		var command: DirectMoveCommand = node.find_child("DirectMoveCommand")
+		if command:
+			command.start(get_global_mouse_position())
+
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		match event.button_index:
@@ -70,11 +81,12 @@ func _unhandled_input(event):
 				if event.pressed:
 					init_selection_box(get_global_mouse_position())
 				else:
-					complete_selection()
+					if active_selection_box:
+						complete_selection()
 				get_viewport().set_input_as_handled()
 			MOUSE_BUTTON_RIGHT:
 				if event.pressed:
-					pass
+					placeholder_rmb_behavior()
 				else:
 					pass
 	if event is InputEventMouseMotion:
