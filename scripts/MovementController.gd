@@ -1,3 +1,4 @@
+@tool
 class_name MovementController extends Node
 
 func _get_configuration_warnings():

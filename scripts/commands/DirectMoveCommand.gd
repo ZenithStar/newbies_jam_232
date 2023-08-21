@@ -1,3 +1,4 @@
+@tool
 class_name DirectMoveCommand extends GroundedCommandComponent
 
 func _get_configuration_warnings():
@@ -10,6 +11,7 @@ func _get_configuration_warnings():
 func _run(delta):
 	var offset = ground_target - get_parent().global_position
 	if offset.length() <= tolerance:
+		controller.velocity_command = Vector2.ZERO
 		state = CommandComponentState.INACTIVE
 		result = CommandComponentResult.SUCCESS
 	else:
