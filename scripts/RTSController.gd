@@ -15,9 +15,11 @@ func enable():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 func disable():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
+@export_category("Zoom")
 @export var zoom_speed: float = 2.0 ** (1.0 / 20.0)
 @export var zoom_ease_duration = 0.25
+@export var zoom_clamp_min: float = 1.0/3.0
+@export var zoom_clamp_max: float = 3.0
 @onready var zoom_setpoint: Vector2 = zoom:
 	get:
 		return zoom_setpoint
@@ -27,9 +29,11 @@ func disable():
 # apply zoom to the camera, keeping get_global_mouse_position() constant
 func zoom_to_mouse(zoom_change: float):
 	var old_offset = global_position - get_global_mouse_position()
-	var new_offset = old_offset * zoom_change
-	var offset_diff = old_offset - new_offset
+	var old_zoom = zoom_setpoint
 	zoom_setpoint *= zoom_change
+	zoom_setpoint = zoom_setpoint.clamp(Vector2.ONE * zoom_clamp_min, Vector2.ONE * zoom_clamp_max)
+	var new_offset = old_offset * zoom_setpoint / old_zoom
+	var offset_diff = old_offset - new_offset
 	global_position += offset_diff # Tweening position is unnecessary with position smoothing enabled
 
 var selection_box_class: PackedScene = preload("res://prefabs/selection_box.tscn")
