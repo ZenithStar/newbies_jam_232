@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://2aksyk4luns3"]
+[gd_scene load_steps=8 format=3 uid="uid://lqh8kxojq588"]
 
 [ext_resource type="Texture2D" uid="uid://css7i88if1rcx" path="res://icon.svg" id="1_jsfo4"]
 [ext_resource type="Script" path="res://scripts/RTSController.gd" id="1_mrgxa"]
 [ext_resource type="Script" path="res://scripts/commands/DirectMoveCommand.gd" id="3_53yjq"]
 [ext_resource type="Script" path="res://scripts/MovementController.gd" id="3_mpmxk"]
 [ext_resource type="Script" path="res://scripts/Selectable.gd" id="3_s81ya"]
+[ext_resource type="Script" path="res://scripts/MovementVisualizer.gd" id="5_poxx4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cxlq8"]
 size = Vector2(128, 128)
@@ -29,6 +30,9 @@ script = ExtResource("3_mpmxk")
 
 [node name="DirectMoveCommand" type="Node" parent="CharacterBody2D"]
 script = ExtResource("3_53yjq")
+
+[node name="MovementVisualizer" type="Node" parent="CharacterBody2D"]
+script = ExtResource("5_poxx4")
 
 [node name="RTSController" type="Camera2D" parent="."]
 position_smoothing_enabled = true
