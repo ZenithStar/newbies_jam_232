@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://cfxpkkwihh21s"]
+
+[ext_resource type="Texture2D" uid="uid://cmvr35nrnfynp" path="res://assets/Ancient Forest/anim/big_tree.png" id="1_depbe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpslb"]
+atlas = ExtResource("1_depbe")
+region = Rect2(352, 0, 352, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2026y"]
+atlas = ExtResource("1_depbe")
+region = Rect2(0, 0, 352, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6fqw"]
+atlas = ExtResource("1_depbe")
+region = Rect2(704, 0, 352, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0bxr"]
+atlas = ExtResource("1_depbe")
+region = Rect2(1056, 0, 352, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqsaw"]
+atlas = ExtResource("1_depbe")
+region = Rect2(1408, 0, 352, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1j535"]
+atlas = ExtResource("1_depbe")
+region = Rect2(0, 416, 352, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34smh"]
+atlas = ExtResource("1_depbe")
+region = Rect2(352, 416, 352, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt5hr"]
+atlas = ExtResource("1_depbe")
+region = Rect2(704, 416, 352, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rygal"]
+atlas = ExtResource("1_depbe")
+region = Rect2(1056, 416, 352, 416)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otmjj"]
+atlas = ExtResource("1_depbe")
+region = Rect2(1408, 416, 352, 416)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oukvw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpslb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2026y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6fqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0bxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqsaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1j535")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34smh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xt5hr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rygal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otmjj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Big Ancient Tree" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -155)
+sprite_frames = SubResource("SpriteFrames_oukvw")
+autoplay = "default"
+frame_progress = 0.0770157
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-79, 29, -71, -18, 75, -16, 95, 29, 46, 48, -25, 55)

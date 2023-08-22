@@ -35,7 +35,7 @@ func zoom_to_mouse(zoom_change: float):
 	var new_offset = old_offset * zoom_setpoint / old_zoom
 	var offset_diff = old_offset - new_offset
 	global_position += offset_diff # Tweening position is unnecessary with position smoothing enabled
-
+	
 var selection_box_class: PackedScene = preload("res://prefabs/selection_box.tscn")
 @onready var active_selection_box: SelectionBox = null
 @onready var active_selection: Array[Node2D] = []:

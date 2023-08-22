@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dnugb06t5e0ml"
+
+[deps]
+
+files=["res://assets/Character Sheets/all-credits.notes.translation", "res://assets/Character Sheets/all-credits.authors.translation", "res://assets/Character Sheets/all-credits.licenses.translation", "res://assets/Character Sheets/all-credits.url1.translation", "res://assets/Character Sheets/all-credits.url2.translation", "res://assets/Character Sheets/all-credits.url3.translation", "res://assets/Character Sheets/all-credits.url4.translation", "res://assets/Character Sheets/all-credits.url5.translation", "res://assets/Character Sheets/all-credits.url6.translation", "res://assets/Character Sheets/all-credits.url7.translation", "res://assets/Character Sheets/all-credits.url8.translation", "res://assets/Character Sheets/all-credits.url9.translation", "res://assets/Character Sheets/all-credits.url10.translation", "res://assets/Character Sheets/all-credits.url11.translation", "res://assets/Character Sheets/all-credits.url12.translation", "res://assets/Character Sheets/all-credits.url13.translation", "res://assets/Character Sheets/all-credits.url14.translation", "res://assets/Character Sheets/all-credits.url15.translation", "res://assets/Character Sheets/all-credits.status.translation"]
+
+source_file="res://assets/Character Sheets/all-credits.csv"
+dest_files=["res://assets/Character Sheets/all-credits.notes.translation", "res://assets/Character Sheets/all-credits.authors.translation", "res://assets/Character Sheets/all-credits.licenses.translation", "res://assets/Character Sheets/all-credits.url1.translation", "res://assets/Character Sheets/all-credits.url2.translation", "res://assets/Character Sheets/all-credits.url3.translation", "res://assets/Character Sheets/all-credits.url4.translation", "res://assets/Character Sheets/all-credits.url5.translation", "res://assets/Character Sheets/all-credits.url6.translation", "res://assets/Character Sheets/all-credits.url7.translation", "res://assets/Character Sheets/all-credits.url8.translation", "res://assets/Character Sheets/all-credits.url9.translation", "res://assets/Character Sheets/all-credits.url10.translation", "res://assets/Character Sheets/all-credits.url11.translation", "res://assets/Character Sheets/all-credits.url12.translation", "res://assets/Character Sheets/all-credits.url13.translation", "res://assets/Character Sheets/all-credits.url14.translation", "res://assets/Character Sheets/all-credits.url15.translation", "res://assets/Character Sheets/all-credits.status.translation"]
+
+[params]
+
+compress=true
+delimiter=0

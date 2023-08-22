@@ -7,3 +7,5 @@ Secret Area!
 
 # Acknowledgements
 Art assets: 
+https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/
+https://szadiart.itch.io/
