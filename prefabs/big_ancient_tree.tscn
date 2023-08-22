@@ -89,4 +89,4 @@ autoplay = "default"
 frame_progress = 0.0770157
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-79, 29, -71, -18, 75, -16, 95, 29, 46, 48, -25, 55)
+polygon = PackedVector2Array(-68, 28, -64, -18, 75, -16, 84, 27, 38, 43, -25, 46)

@@ -2,8 +2,7 @@ class_name RTSController extends Camera2D
 
 @export var scroll_speed: float = 400
 func _ready():
-	get_window().focus_entered.connect(enable)
-	get_window().focus_exited.connect(disable)
+	get_window().focus_exited.connect(PauseMenu.pause)
 	enable()
 	PauseMenu.paused.connect(paused_handler)
 func paused_handler(pause_state: bool):
@@ -15,6 +14,9 @@ func enable():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 func disable():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+
 @export_category("Zoom")
 @export var zoom_speed: float = 2.0 ** (1.0 / 20.0)
 @export var zoom_ease_duration = 0.25
@@ -35,7 +37,9 @@ func zoom_to_mouse(zoom_change: float):
 	var new_offset = old_offset * zoom_setpoint / old_zoom
 	var offset_diff = old_offset - new_offset
 	global_position += offset_diff # Tweening position is unnecessary with position smoothing enabled
-	
+
+
+
 var selection_box_class: PackedScene = preload("res://prefabs/selection_box.tscn")
 @onready var active_selection_box: SelectionBox = null
 @onready var active_selection: Array[Node2D] = []:
@@ -63,15 +67,40 @@ func complete_selection():
 	active_selection = active_selection_box.get_overlapping_bodies()
 	active_selection_box.queue_free()
 	active_selection_box = null
-	
-@onready var active_command: String = ""
+	calculate_formation()
+@onready var formation: Dictionary = {}
+enum Formation {
+	USE_CURRENT,
+	LINE,
+	HEX_FILL
+}
+@export var formation_style: Formation = Formation.USE_CURRENT
+@export var formation_unit_seperation: float = 24.0
+func calculate_formation():
+	formation = {}
+	match formation_style:
+		Formation.USE_CURRENT:
+			var center: Vector2 = Vector2.ZERO
+			for body in active_selection:
+				center += body.global_position
+			center /= active_selection.size()
+			for body in active_selection:
+				formation[body] = body.global_position - center
+		Formation.LINE:
+			var lines: Array[int]
+			for i in 3:
+				lines
+			for body in active_selection:
+				formation[body]
 
+
+@onready var active_command: String = ""
 
 func placeholder_rmb_behavior():
 	for node in active_selection:
 		var command: DirectMoveCommand = node.find_child("DirectMoveCommand")
 		if command:
-			command.start(get_global_mouse_position())
+			command.start(get_global_mouse_position()+formation[node])
 
 
 func _unhandled_input(event):
