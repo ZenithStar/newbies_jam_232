@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://scripts/Selectable.gd" id="3_s81ya"]
 [ext_resource type="Script" path="res://scripts/MovementVisualizer.gd" id="5_poxx4"]
 [ext_resource type="PackedScene" uid="uid://cfxpkkwihh21s" path="res://prefabs/big_ancient_tree.tscn" id="8_h2lq4"]
-[ext_resource type="PackedScene" uid="uid://cvhvmxwgnmh2y" path="res://prefabs/dagger_boi.tscn" id="9_ar30c"]
-[ext_resource type="PackedScene" uid="uid://ba8c635cedx5l" path="res://prefabs/bow_gurl.tscn" id="10_to4tw"]
+[ext_resource type="PackedScene" uid="uid://cvhvmxwgnmh2y" path="res://prefabs/characters/dagger_boi.tscn" id="9_ar30c"]
+[ext_resource type="PackedScene" uid="uid://ba8c635cedx5l" path="res://prefabs/characters/bow_gurl.tscn" id="10_to4tw"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -43,5 +43,5 @@ position = Vector2(166, -3)
 [node name="Dagger Boi" parent="." instance=ExtResource("9_ar30c")]
 position = Vector2(-139, -3)
 
-[node name="LPC Character2" parent="." instance=ExtResource("10_to4tw")]
+[node name="Bow Gurl" parent="." instance=ExtResource("10_to4tw")]
 position = Vector2(-202, 0)

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/commands/DirectMoveCommand.gd" id="5_wukxh"]
 [ext_resource type="Script" path="res://scripts/MovementVisualizer.gd" id="6_lirdu"]
 
-[node name="LPC Character" instance=ExtResource("1_qldt3")]
+[node name="Bow Gurl" instance=ExtResource("1_qldt3")]
 
 [node name="LPCSprite2D" parent="." index="0"]
 texture = ExtResource("2_jpkl0")
