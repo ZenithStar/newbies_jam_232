@@ -1,25 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvhvmxwgnmh2y"]
+[gd_scene load_steps=3 format=3 uid="uid://cvhvmxwgnmh2y"]
 
 [ext_resource type="PackedScene" uid="uid://dpke07eh0o6fo" path="res://prefabs/LPC/lpc_character.tscn" id="1_4e7jw"]
 [ext_resource type="Texture2D" uid="uid://cvqp83crcpef5" path="res://assets/Character Sheets/dagger_boi.png" id="2_awmud"]
-[ext_resource type="Script" path="res://scripts/Selectable.gd" id="2_k33q7"]
-[ext_resource type="Script" path="res://scripts/MovementController.gd" id="3_5p8fw"]
-[ext_resource type="Script" path="res://scripts/commands/DirectMoveCommand.gd" id="4_38qns"]
-[ext_resource type="Script" path="res://scripts/MovementVisualizer.gd" id="5_7atvn"]
 
 [node name="Dagger Boi" instance=ExtResource("1_4e7jw")]
 
 [node name="LPCSprite2D" parent="." index="0"]
 texture = ExtResource("2_awmud")
-
-[node name="Selectable" type="Node" parent="." index="2"]
-script = ExtResource("2_k33q7")
-
-[node name="MovementController" type="Node" parent="." index="3"]
-script = ExtResource("3_5p8fw")
-
-[node name="DirectMoveCommand" type="Node" parent="." index="4"]
-script = ExtResource("4_38qns")
-
-[node name="MovementVisualizer" type="Node" parent="." index="5"]
-script = ExtResource("5_7atvn")

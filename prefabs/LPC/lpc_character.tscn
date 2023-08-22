@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpke07eh0o6fo"]
+[gd_scene load_steps=8 format=3 uid="uid://dpke07eh0o6fo"]
 
 [ext_resource type="Texture2D" uid="uid://cl77oun34jwyh" path="res://assets/Character Sheets/default.png" id="1_jvesq"]
 [ext_resource type="Script" path="res://prefabs/LPC/lpc_sprite.gd" id="2_t2vp0"]
+[ext_resource type="Script" path="res://scripts/components/Selectable.gd" id="3_wwqdq"]
+[ext_resource type="Script" path="res://scripts/MovementController.gd" id="4_ed40h"]
+[ext_resource type="Script" path="res://scripts/commands/DirectMoveCommand.gd" id="5_s2myd"]
+[ext_resource type="Script" path="res://scripts/MovementVisualizer.gd" id="6_6ts5a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2lax"]
 radius = 16.0
@@ -20,3 +24,15 @@ script = ExtResource("2_t2vp0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f2lax")
+
+[node name="Selectable" type="Node" parent="."]
+script = ExtResource("3_wwqdq")
+
+[node name="MovementController" type="Node" parent="."]
+script = ExtResource("4_ed40h")
+
+[node name="DirectMoveCommand" type="Node" parent="."]
+script = ExtResource("5_s2myd")
+
+[node name="MovementVisualizer" type="Node" parent="."]
+script = ExtResource("6_6ts5a")

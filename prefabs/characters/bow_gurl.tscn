@@ -1,11 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ba8c635cedx5l"]
+[gd_scene load_steps=3 format=3 uid="uid://ba8c635cedx5l"]
 
 [ext_resource type="PackedScene" uid="uid://dpke07eh0o6fo" path="res://prefabs/LPC/lpc_character.tscn" id="1_qldt3"]
 [ext_resource type="Texture2D" uid="uid://cjf8u1gi1iuj4" path="res://assets/Character Sheets/bow_gurl.png" id="2_jpkl0"]
-[ext_resource type="Script" path="res://scripts/Selectable.gd" id="3_i1lhu"]
-[ext_resource type="Script" path="res://scripts/MovementController.gd" id="4_ivsmf"]
-[ext_resource type="Script" path="res://scripts/commands/DirectMoveCommand.gd" id="5_wukxh"]
-[ext_resource type="Script" path="res://scripts/MovementVisualizer.gd" id="6_lirdu"]
 
 [node name="Bow Gurl" instance=ExtResource("1_qldt3")]
 
@@ -14,15 +10,3 @@ texture = ExtResource("2_jpkl0")
 hframes = 18
 vframes = 29
 frame = 180
-
-[node name="Selectable" type="Node" parent="." index="2"]
-script = ExtResource("3_i1lhu")
-
-[node name="MovementController" type="Node" parent="." index="3"]
-script = ExtResource("4_ivsmf")
-
-[node name="DirectMoveCommand" type="Node" parent="." index="4"]
-script = ExtResource("5_wukxh")
-
-[node name="MovementVisualizer" type="Node" parent="." index="5"]
-script = ExtResource("6_lirdu")

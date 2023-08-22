@@ -75,7 +75,7 @@ enum Formation {
 	HEX_FILL
 }
 @export var formation_style: Formation = Formation.USE_CURRENT
-@export var formation_unit_seperation: float = 24.0
+@export var formation_unit_seperation: float = 50.0
 func calculate_formation():
 	formation = {}
 	match formation_style:
@@ -86,21 +86,17 @@ func calculate_formation():
 			center /= active_selection.size()
 			for body in active_selection:
 				formation[body] = body.global_position - center
-		Formation.LINE:
-			var lines: Array[int]
-			for i in 3:
-				lines
-			for body in active_selection:
-				formation[body]
+		Formation.LINE: # TODO
+			pass
 
 
 @onready var active_command: String = ""
 
 func placeholder_rmb_behavior():
-	for node in active_selection:
-		var command: DirectMoveCommand = node.find_child("DirectMoveCommand")
+	for body in formation:
+		var command: DirectMoveCommand = body.find_child("DirectMoveCommand")
 		if command:
-			command.start(get_global_mouse_position()+formation[node])
+			command.start(get_global_mouse_position()+formation[body])
 
 
 func _unhandled_input(event):
