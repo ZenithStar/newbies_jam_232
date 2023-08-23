@@ -24,13 +24,31 @@ y_sort_enabled = true
 position = Vector2(150, 0)
 
 [node name="LPC Character" parent="Entities" instance=ExtResource("3_0i6hl")]
-position = Vector2(-108.526, -16.076)
+position = Vector2(-108.526, -48.152)
 
 [node name="Dagger Boi" parent="Entities" instance=ExtResource("9_ar30c")]
-position = Vector2(-146.412, -31.6916)
+position = Vector2(-146.412, -63.7676)
 
 [node name="Bow Gurl" parent="Entities" instance=ExtResource("10_to4tw")]
-position = Vector2(-182.793, -55.3392)
+position = Vector2(-182.793, -87.4152)
+
+[node name="LPC Character2" parent="Entities" instance=ExtResource("3_0i6hl")]
+position = Vector2(-182.733, 3.18721)
+
+[node name="Dagger Boi2" parent="Entities" instance=ExtResource("9_ar30c")]
+position = Vector2(-220.619, -12.4284)
+
+[node name="Bow Gurl2" parent="Entities" instance=ExtResource("10_to4tw")]
+position = Vector2(-257, -36.076)
+
+[node name="LPC Character3" parent="Entities" instance=ExtResource("3_0i6hl")]
+position = Vector2(-269.733, 88.2632)
+
+[node name="Dagger Boi3" parent="Entities" instance=ExtResource("9_ar30c")]
+position = Vector2(-307.619, 72.6476)
+
+[node name="Bow Gurl3" parent="Entities" instance=ExtResource("10_to4tw")]
+position = Vector2(-344, 49)
 
 [node name="RTSController" type="Camera2D" parent="."]
 position_smoothing_enabled = true

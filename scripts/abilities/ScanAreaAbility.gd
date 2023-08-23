@@ -9,7 +9,7 @@ func _ready():
 func start():
 	state = CommandComponentState.RUNNING
 	fogRevealComponent.radius += radiusIncrease
-	fogRevealComponent.compile_gradient()
+	fogRevealComponent.recompile()
 	
 	await get_tree().create_timer(1).timeout
 	stop()
@@ -17,4 +17,4 @@ func start():
 func stop():
 	state = CommandComponentState.INACTIVE
 	fogRevealComponent.radius -= radiusIncrease
-	fogRevealComponent.compile_gradient()
+	fogRevealComponent.recompile()

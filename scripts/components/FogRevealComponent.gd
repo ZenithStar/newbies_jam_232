@@ -8,6 +8,10 @@ var light_image: Image
 var light_rect: Rect2
 var light_offset: Vector2
 
+func recompile():
+	compile_gradient()
+	compile_light.call_deferred()
+
 func compile_gradient():
 	gradient = GradientTexture2D.new()
 	gradient.gradient = Gradient.new()
@@ -20,19 +24,25 @@ func compile_gradient():
 	gradient.fill_from = Vector2(0.5, 0.5)
 	gradient.fill_to = Vector2(0.5, 0.0)
 	
-	_finish.call_deferred()
-
-func _ready():
-	compile_gradient()
-	
-func _finish():
+func compile_light():
 	light_image = gradient.get_image()
 	light_rect = Rect2(Vector2.ZERO, light_image.get_size())
 	light_offset = -light_image.get_size()/2
+
+func gather_RTSMaps():
+	maps = []
 	for map in get_tree().root.find_children("*","RTSMap",true,false):
 		maps.append(map)
-func _physics_process(delta):
+
+func _ready():
+	gather_RTSMaps()
+	compile_gradient()
+	compile_light.call_deferred()
+	
+func update_RTSMaps():
 	for map in maps:
 		if map.fog_of_war:
 			map.fog_image.blend_rect(light_image, light_rect,  global_position - map.fog_sprite.global_position + light_offset)
-		
+
+func _physics_process(delta):
+	update_RTSMaps()
