@@ -1,9 +1,9 @@
 class_name RTSMap extends TileMap
 
 @export var fog_of_war: bool = true
-@export var fog_color: Color = Color(Color.BLACK, 0.8)
 @export var limit_camera: bool = true
 @export var world_boundary: bool = true
+@export var camera_limit_border: float = 360.0
 
 func create_world_boundary():
 	var boundary = get_used_rect()
@@ -38,7 +38,7 @@ func create_world_boundary():
 	static_body.add_child(collision_shape_up)
 	static_body.name = "WorldBoundary"
 	add_child(static_body)
-
+var invert_material = preload("res://shaders/material_canvas_item_invert.tres")
 @onready var fog_image: Image
 @onready var fog_sprite: Sprite2D
 func create_fog():
@@ -51,9 +51,10 @@ func create_fog():
 	fog_sprite.position = Vector2(get_used_rect().position * tile_set.tile_size)
 	var image_size = get_used_rect().size * tile_set.tile_size
 	fog_image = Image.create(image_size.x, image_size.y, false, Image.FORMAT_RGBA8)
-	fog_image.fill(fog_color)
+	#fog_image.fill(fog_color)
 	var image_texture = ImageTexture.create_from_image(fog_image)
 	fog_sprite.texture = image_texture
+	fog_sprite.material = invert_material
 	canvas_layer.add_child(fog_sprite)
 	add_child(canvas_layer)
 
@@ -61,11 +62,16 @@ func limit_camera_to_map():
 	var cameras = $"..".find_children("*","Camera2D", false)
 	var boundary = get_used_rect()
 	for camera in cameras:
-		camera.limit_left = boundary.position.x * tile_set.tile_size.x
-		camera.limit_top = boundary.position.y * tile_set.tile_size.y
-		camera.limit_right = boundary.end.x * tile_set.tile_size.x
-		camera.limit_bottom = boundary.end.y * tile_set.tile_size.y
+		camera.limit_left = boundary.position.x * tile_set.tile_size.x - camera_limit_border
+		camera.limit_top = boundary.position.y * tile_set.tile_size.y - camera_limit_border
+		camera.limit_right = boundary.end.x * tile_set.tile_size.x + camera_limit_border
+		camera.limit_bottom = boundary.end.y * tile_set.tile_size.y + camera_limit_border
 		camera.limit_smoothed = true
+
+func limit_camera_to_fog():
+	var cameras = $"..".find_children("*","Camera2D", false)
+	var boundary = fog_image.get_used_rect() # this is actually a very expensive call...
+	
 
 func _ready():
 	if world_boundary:
@@ -82,7 +88,12 @@ func _ready():
 			camera.limit_bottom = boundary.end.y * tile_set.tile_size.y
 			camera.limit_smoothed = true
 
+@export var throttle_fps = 5.0
+@onready var throttle_hack = 1.0/throttle_fps
 func _process(delta):
-	if fog_of_war:
-		fog_sprite.texture = ImageTexture.create_from_image(fog_image)
+	throttle_hack +=delta
+	if throttle_hack >= 1.0/throttle_fps:
+		if fog_of_war:
+			fog_sprite.texture = ImageTexture.create_from_image(fog_image)
+		throttle_hack = 0.0
 		
