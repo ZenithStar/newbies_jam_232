@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scripts/components/FogRevealComponent.gd" id="9_tvdxp"]
 [ext_resource type="Script" path="res://scripts/AbilityManager.gd" id="10_7tn8r"]
 [ext_resource type="Script" path="res://scripts/AbilityVisualizer.gd" id="11_vqffl"]
-[ext_resource type="Script" path="res://scripts/abilities/ScanAreaAbility.gd" id="12_ileld"]
+[ext_resource type="Script" path="res://scripts/abilities/AbilityComponent.gd" id="12_6flqq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2lax"]
 radius = 16.0
@@ -61,5 +61,5 @@ script = ExtResource("10_7tn8r")
 [node name="AbilityVisualizer" type="Node" parent="."]
 script = ExtResource("11_vqffl")
 
-[node name="ScanAreaAbility" type="Node" parent="."]
-script = ExtResource("12_ileld")
+[node name="AbilityComponent" type="Node" parent="."]
+script = ExtResource("12_6flqq")

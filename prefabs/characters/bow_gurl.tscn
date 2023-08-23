@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba8c635cedx5l"]
+[gd_scene load_steps=4 format=3 uid="uid://ba8c635cedx5l"]
 
 [ext_resource type="PackedScene" uid="uid://dpke07eh0o6fo" path="res://prefabs/LPC/lpc_character.tscn" id="1_qldt3"]
 [ext_resource type="Texture2D" uid="uid://cjf8u1gi1iuj4" path="res://assets/Character Sheets/bow_gurl.png" id="2_jpkl0"]
+[ext_resource type="Script" path="res://scripts/abilities/ScanAreaAbility.gd" id="3_w3q8w"]
 
 [node name="Bow Gurl" instance=ExtResource("1_qldt3")]
 
@@ -10,3 +11,7 @@ texture = ExtResource("2_jpkl0")
 hframes = 18
 vframes = 29
 frame = 180
+
+[node name="AbilityComponent" parent="." index="11"]
+script = ExtResource("3_w3q8w")
+radiusIncrease = 128
