@@ -96,7 +96,8 @@ func placeholder_rmb_behavior():
 	for body in formation:
 		var command: DirectMoveCommand = body.find_child("DirectMoveCommand")
 		if command:
-			command.start(get_global_mouse_position()+formation[body])
+			command.pass_data(get_global_mouse_position()+formation[body])
+			command.start()
 
 
 func _unhandled_input(event):
