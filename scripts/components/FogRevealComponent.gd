@@ -7,7 +7,8 @@ var gradient: GradientTexture2D
 var light_image: Image
 var light_rect: Rect2
 var light_offset: Vector2
-func _ready():
+
+func compile_gradient():
 	gradient = GradientTexture2D.new()
 	gradient.gradient = Gradient.new()
 	gradient.gradient.offsets[0] = intensity
@@ -18,7 +19,12 @@ func _ready():
 	gradient.fill = GradientTexture2D.FILL_RADIAL
 	gradient.fill_from = Vector2(0.5, 0.5)
 	gradient.fill_to = Vector2(0.5, 0.0)
+	
 	_finish.call_deferred()
+
+func _ready():
+	compile_gradient()
+	
 func _finish():
 	light_image = gradient.get_image()
 	light_rect = Rect2(Vector2.ZERO, light_image.get_size())

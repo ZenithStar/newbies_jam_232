@@ -15,11 +15,13 @@ enum CommandComponentResult {
 func start():
 	state = CommandComponentState.RUNNING
 
+func stop():
+	state = CommandComponentState.INACTIVE
+
 func _run(delta):
 	pass ## pure virtual
 
-func stop():
-	state = CommandComponentState.INACTIVE
+
 
 func _physics_process(delta):
 	match state:
