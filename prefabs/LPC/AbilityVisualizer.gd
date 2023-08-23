@@ -33,7 +33,7 @@ func start():
 	headOverlay.set_script(null)
 	abilityVisualizationContainer.get_child(0).add_child(headOverlay)
 	headOverlay.vframes = headOverlay.vframes*2
-	headOverlay.frame = headOverlay.frame*2
+	headOverlay.frame_coords = Vector2i(0,20)
 	headOverlay.position = Vector2(45,-51)
 	headOverlay.scale = Vector2(3,3)
 	
