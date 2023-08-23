@@ -18,11 +18,24 @@ func start():
 	state = CommandComponentState.RUNNING
 	
 	abilityVisualizationContainer = VBoxContainer.new()
-	get_parent().add_child(abilityVisualizationContainer)
+	get_parent().get_parent().get_parent().find_child("AbilityVisulizatonLayer").get_child(0).add_child(abilityVisualizationContainer)
 	abilityVisualizationContainer.anchors_preset = VBoxContainer.PRESET_CENTER_TOP
 	abilityVisualizationContainer.size = Vector2(80,32)
 	abilityVisualizationContainer.position = Vector2(-40,16)
 	
+	abilityVisualizationContainer.add_child(Control.new())
+	
+	var colorRect:ColorRect = ColorRect.new()
+	abilityVisualizationContainer.get_child(0).add_child(colorRect)
+	colorRect.size = Vector2(98,110)
+	
+	var headOverlay:Sprite2D = get_parent().find_child("LPCSprite2D").duplicate(1)
+	headOverlay.set_script(null)
+	abilityVisualizationContainer.get_child(0).add_child(headOverlay)
+	headOverlay.vframes = headOverlay.vframes*2
+	headOverlay.frame = headOverlay.frame*2
+	headOverlay.position = Vector2(45,-51)
+	headOverlay.scale = Vector2(3,3)
 	
 	for ability in abilityManager.managedAbilities:
 		var abilityButton:Button = Button.new()
@@ -35,9 +48,10 @@ func stop():
 
 func _run(_delta):
 	for abilityButton in abilityVisualizationContainer.get_children():
-		if abilityButton.button_pressed and InputEvent:
-			var abilityIndex = abilityVisualizationContainer.get_children().find(abilityButton)
-			abilityManager.managedAbilities[abilityIndex].start()
+		if abilityButton is Button:
+			if abilityButton.button_pressed and Input.is_action_just_pressed("LeftMouseInput") :
+				var abilityIndex = abilityVisualizationContainer.get_children().find(abilityButton)
+				abilityManager.managedAbilities[abilityIndex-1].start()
 
 func _physics_process(delta):
 	match [state,selectable.selected]:

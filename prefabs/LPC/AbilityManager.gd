@@ -1,6 +1,6 @@
 class_name AbilityManager extends CommandComponent
 
-@export var managedAbilities:Array[AbilityComponent] = []
+var managedAbilities:Array[AbilityComponent] = []
 
 func _get_configuration_warnings():
 	if get_parent() is CharacterBody2D:

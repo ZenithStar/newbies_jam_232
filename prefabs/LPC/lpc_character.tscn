@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpke07eh0o6fo"]
+[gd_scene load_steps=14 format=3 uid="uid://dpke07eh0o6fo"]
 
 [ext_resource type="Texture2D" uid="uid://cl77oun34jwyh" path="res://assets/Character Sheets/default.png" id="1_jvesq"]
 [ext_resource type="Script" path="res://prefabs/LPC/lpc_sprite.gd" id="2_t2vp0"]
@@ -9,6 +9,9 @@
 [ext_resource type="Script" path="res://scripts/components/HealthComponent.gd" id="7_k0pgh"]
 [ext_resource type="PackedScene" uid="uid://duaaortvejqit" path="res://prefabs/HealthNameplate/health_nameplate.tscn" id="8_s6q7i"]
 [ext_resource type="Script" path="res://scripts/components/FogRevealComponent.gd" id="9_tvdxp"]
+[ext_resource type="Script" path="res://prefabs/LPC/AbilityManager.gd" id="10_jacgh"]
+[ext_resource type="Script" path="res://prefabs/LPC/AbilityVisualizer.gd" id="11_fd8mq"]
+[ext_resource type="Script" path="res://prefabs/LPC/AbilityComponent.gd" id="12_iymne"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2lax"]
 radius = 16.0
@@ -51,3 +54,12 @@ offset_bottom = -46.0
 
 [node name="FogRevealComponent" type="Node2D" parent="."]
 script = ExtResource("9_tvdxp")
+
+[node name="AbilityManager" type="Node" parent="."]
+script = ExtResource("10_jacgh")
+
+[node name="AbilityVisualizer" type="Node" parent="."]
+script = ExtResource("11_fd8mq")
+
+[node name="AbilityComponent" type="Node" parent="."]
+script = ExtResource("12_iymne")
