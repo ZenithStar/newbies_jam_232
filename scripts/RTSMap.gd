@@ -60,6 +60,19 @@ func create_fog():
 	fog_sprite.material = invert_material
 	canvas_layer.add_child(fog_sprite)
 	add_child(canvas_layer)
+	
+@onready var fog_canvas: FogOfWar
+func create_fog2():
+	var canvas_layer = CanvasLayer.new()
+	canvas_layer.layer = 2
+	canvas_layer.follow_viewport_enabled = true
+	fog_canvas = FogOfWar.new()
+	fog_canvas.name = "FogOfWar"
+	fog_canvas.position = Vector2(get_used_rect().position * tile_set.tile_size)
+	fog_canvas.size = get_used_rect().size * tile_set.tile_size
+	#fog_canvas.material = invert_material
+	canvas_layer.add_child(fog_canvas)
+	add_child(canvas_layer)
 
 var cameras: Array[Camera2D] = []
 func limit_camera_to_map():
@@ -94,7 +107,7 @@ func _ready():
 	if world_boundary:
 		create_world_boundary()
 	if fog_of_war:
-		create_fog()
+		create_fog2()
 	if limit_camera:
 		if fog_of_war:
 			update_camera_thread = Thread.new()
@@ -108,6 +121,6 @@ func _process(delta):
 	throttle_hack +=delta
 	if throttle_hack >= 1.0/throttle_fps:
 		if fog_of_war:
-			fog_sprite.texture = ImageTexture.create_from_image(fog_image)
+			pass#fog_sprite.texture = ImageTexture.create_from_image(fog_image)
 		throttle_hack = 0.0
 		
