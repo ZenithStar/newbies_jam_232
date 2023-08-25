@@ -18,7 +18,7 @@ func start():
 func stop():
 	state = CommandComponentState.INACTIVE
 
-func _run(delta):
+func _run(_delta):
 	pass ## pure virtual
 
 

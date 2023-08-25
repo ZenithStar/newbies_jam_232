@@ -124,7 +124,7 @@ func update_fog():
 		update_fog_visuals()
 
 
-func _process(delta):
+func _process(_delta):
 	update_fog()
 
 

@@ -11,7 +11,7 @@ func _get_configuration_warnings():
 @onready var velocity_command: Vector2 = Vector2.ZERO ## a vector with a maximum length of 1.0
 @onready var velocity_reaction: Vector2 = Vector2.ZERO
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if get_parent() is CharacterBody2D:
 		if velocity_command.length() > 1.0:
 			velocity_command = velocity_command.normalized()

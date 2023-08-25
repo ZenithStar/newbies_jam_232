@@ -29,7 +29,7 @@ enum AnimationState {
 }
 @export var animation: AnimationState = AnimationState.STAND:
 	get:
-		return animation_offset
+		return animation_offset as AnimationState
 	set(value):
 		animation_offset = value
 @export var direction_offset: int = 2:
@@ -46,7 +46,7 @@ enum DirectionState {
 }
 @export var direction: DirectionState = DirectionState.DOWN:
 	get:
-		return direction_offset
+		return direction_offset as DirectionState
 	set(value):
 		direction_offset = value
 var NUM_FRAMES: Dictionary = {

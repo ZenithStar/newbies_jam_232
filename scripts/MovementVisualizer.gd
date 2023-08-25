@@ -1,15 +1,12 @@
 class_name MovementVisualizer extends CommandComponent
 
 func _get_configuration_warnings():
-	if get_parent() is CharacterBody2D:
-		return ""
-	else:
-		return "This component depends on a CharacterBody2D parent"
-	
-	if get_parent().find_child("DirectMoveCommand"):
-		return ""
-	else:
-		return "This component depends on a DirectMoveCommand sibling"
+	var output: String = ""
+	if not get_parent() is CharacterBody2D:
+		output += "This component depends on a CharacterBody2D parent. "
+	if not get_parent().find_child("DirectMoveCommand"):
+		output += "This component depends on a DirectMoveCommand sibling. "
+	return output
 
 @onready var controller: MovementController = get_parent().find_child("MovementController")
 @onready var directMoveComand: DirectMoveCommand = get_parent().find_child("DirectMoveCommand")

@@ -17,8 +17,8 @@ func compile_gradient():
 	gradient.gradient.offsets[0] = intensity
 	gradient.gradient.colors[0] = Color.WHITE
 	gradient.gradient.colors[1] = Color.TRANSPARENT
-	gradient.width = radius * 2
-	gradient.height = radius * 2
+	gradient.width = int(radius * 2)
+	gradient.height = int(radius * 2)
 	gradient.fill = GradientTexture2D.FILL_RADIAL
 	gradient.fill_from = Vector2(0.5, 0.5)
 	gradient.fill_to = Vector2(0.5, 0.0)
