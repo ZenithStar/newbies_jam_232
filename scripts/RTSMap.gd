@@ -5,6 +5,9 @@ class_name RTSMap extends TileMap
 @export var world_boundary: bool = true
 @export var camera_limit_border: float = 360.0
 
+var fogRevealingComponents:Array[FogRevealComponent] = []
+
+
 func create_world_boundary():
 	var boundary = get_used_rect()
 	var static_body = StaticBody2D.new()
@@ -104,10 +107,31 @@ func _ready():
 
 @export var throttle_fps = 5.0
 @onready var throttle_hack = 1.0/throttle_fps
+
+func update_fog_visuals():
+	fog_sprite.texture = ImageTexture.create_from_image(fog_image)
+
+var fogRevealingComponentIndex = 0
+func reveal_fog():
+	if fogRevealingComponentIndex == fogRevealingComponents.size(): fogRevealingComponentIndex = 0
+	fogRevealingComponents[fogRevealingComponentIndex].update_RTSMap(self)
+	fogRevealingComponentIndex+=1
+
+func update_fog():
+	reveal_fog()
+	if fogRevealingComponentIndex == fogRevealingComponents.size():
+		
+		update_fog_visuals()
+
+
 func _process(delta):
-	throttle_hack +=delta
-	if throttle_hack >= 1.0/throttle_fps:
-		if fog_of_war:
-			fog_sprite.texture = ImageTexture.create_from_image(fog_image)
-		throttle_hack = 0.0
+	update_fog()
+
+
+#func _process(delta):
+#	throttle_hack += delta
+#	if throttle_hack >= 1.0/throttle_fps:
+#		if fog_of_war:
+#			fog_update()
+#		throttle_hack = 0.0
 		

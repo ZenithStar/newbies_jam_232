@@ -2,7 +2,6 @@ class_name FogRevealComponent extends Node2D
 
 @export var radius: float = 128.0
 @export_range(0.0, 1.0) var intensity: float = 0.0
-var maps: Array[RTSMap] = []
 var gradient: GradientTexture2D
 var light_image: Image
 var light_rect: Rect2
@@ -29,20 +28,16 @@ func compile_light():
 	light_rect = Rect2(Vector2.ZERO, light_image.get_size())
 	light_offset = -light_image.get_size()/2
 
-func gather_RTSMaps():
-	maps = []
+func link_to_RTSMaps():
 	for map in get_tree().root.find_children("*","RTSMap",true,false):
-		maps.append(map)
+		map.fogRevealingComponents.append(self)
 
 func _ready():
-	gather_RTSMaps()
 	compile_gradient()
 	compile_light.call_deferred()
-	
-func update_RTSMaps():
-	for map in maps:
-		if map.fog_of_war:
-			map.fog_image.blend_rect(light_image, light_rect,  global_position - map.fog_sprite.global_position + light_offset)
+	link_to_RTSMaps()
 
-func _physics_process(delta):
-	update_RTSMaps()
+func update_RTSMap(map:RTSMap):
+	map.fog_image.blend_rect(light_image, light_rect,  global_position - map.fog_sprite.global_position + light_offset)
+
+
