@@ -9,16 +9,8 @@ class_name LPCSprite2D extends Sprite2D
 func _ready():
 	region_enabled = true
 	region_filter_clip_enabled = true
-	texture_changed.connect(process_texture_dimensions)
-	process_texture_dimensions()
 	process_frame_coord()
 	
-func process_texture_dimensions():
-	if texture:
-		num_extra_animations = ((texture.get_size().x / 64) - 21 ) / 2
-func process_frame_dimensions():
-	if animation >= AnimationState.EXTRA_WALK:
-		pass
 func process_frame_coord():
 	match animation:
 		AnimationState.EXTRA_WALK, AnimationState.EXTRA_ATTACK:
