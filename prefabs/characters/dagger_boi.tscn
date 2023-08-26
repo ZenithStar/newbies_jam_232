@@ -1,14 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvhvmxwgnmh2y"]
+[gd_scene load_steps=3 format=3 uid="uid://cvhvmxwgnmh2y"]
 
-[ext_resource type="PackedScene" uid="uid://dpke07eh0o6fo" path="res://prefabs/LPC/lpc_character.tscn" id="1_4e7jw"]
+[ext_resource type="PackedScene" uid="uid://1rkdty67w5nw" path="res://prefabs/LPC/playable_character.tscn" id="1_h74n7"]
 [ext_resource type="Texture2D" uid="uid://cvqp83crcpef5" path="res://assets/Character Sheets/dagger_boi.png" id="2_awmud"]
-[ext_resource type="Script" path="res://scripts/abilities/SpeedUpAbility.gd" id="3_pv4fe"]
 
-[node name="Dagger Boi" instance=ExtResource("1_4e7jw")]
+[node name="Dagger Boi" instance=ExtResource("1_h74n7")]
 
 [node name="LPCSprite2D" parent="." index="0"]
 texture = ExtResource("2_awmud")
-
-[node name="AbilityComponent" parent="." index="11"]
-script = ExtResource("3_pv4fe")
-radiusIncrease = 128

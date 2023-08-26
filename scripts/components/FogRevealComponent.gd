@@ -1,5 +1,6 @@
 class_name FogRevealComponent extends Node2D
 
+@export var active: bool = true
 @export var radius: float = 128.0
 @export_range(0.0, 1.0) var intensity: float = 0.0
 var gradient: GradientTexture2D
@@ -38,6 +39,7 @@ func _ready():
 	link_to_RTSMaps()
 
 func update_RTSMap(map:RTSMap):
-	map.fog_image.blend_rect(light_image, light_rect,  global_position - map.fog_sprite.global_position + light_offset)
+	if active:
+		map.fog_image.blend_rect(light_image, light_rect,  global_position - map.fog_sprite.global_position + light_offset)
 
 

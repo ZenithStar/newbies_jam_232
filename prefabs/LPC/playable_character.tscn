@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://1rkdty67w5nw"]
+
+[ext_resource type="PackedScene" uid="uid://dpke07eh0o6fo" path="res://prefabs/LPC/lpc_character.tscn" id="1_s1n2w"]
+[ext_resource type="Script" path="res://scripts/MovementVisualizer.gd" id="2_vkfm5"]
+[ext_resource type="Script" path="res://scripts/components/FogRevealComponent.gd" id="3_8n50w"]
+[ext_resource type="Script" path="res://scripts/AbilityVisualizer.gd" id="4_2utbf"]
+
+[node name="Playable Character" instance=ExtResource("1_s1n2w")]
+
+[node name="MovementVisualizer" type="Node" parent="." index="9"]
+script = ExtResource("2_vkfm5")
+
+[node name="FogRevealComponent" type="Node2D" parent="." index="10"]
+script = ExtResource("3_8n50w")
+
+[node name="AbilityVisualizer" type="Node" parent="." index="11"]
+script = ExtResource("4_2utbf")

@@ -1,16 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpke07eh0o6fo"]
+[gd_scene load_steps=11 format=3 uid="uid://dpke07eh0o6fo"]
 
 [ext_resource type="Texture2D" uid="uid://cl77oun34jwyh" path="res://assets/Character Sheets/default.png" id="1_jvesq"]
 [ext_resource type="Script" path="res://prefabs/LPC/lpc_sprite.gd" id="2_t2vp0"]
 [ext_resource type="Script" path="res://scripts/components/Selectable.gd" id="3_wwqdq"]
 [ext_resource type="Script" path="res://scripts/MovementController.gd" id="4_ed40h"]
 [ext_resource type="Script" path="res://scripts/commands/DirectMoveCommand.gd" id="5_s2myd"]
-[ext_resource type="Script" path="res://scripts/MovementVisualizer.gd" id="6_6ts5a"]
 [ext_resource type="Script" path="res://scripts/components/HealthComponent.gd" id="7_k0pgh"]
 [ext_resource type="PackedScene" uid="uid://duaaortvejqit" path="res://prefabs/HealthNameplate/health_nameplate.tscn" id="8_s6q7i"]
-[ext_resource type="Script" path="res://scripts/components/FogRevealComponent.gd" id="9_tvdxp"]
 [ext_resource type="Script" path="res://scripts/AbilityManager.gd" id="10_7tn8r"]
-[ext_resource type="Script" path="res://scripts/AbilityVisualizer.gd" id="11_vqffl"]
 [ext_resource type="Script" path="res://scripts/abilities/AbilityComponent.gd" id="12_6flqq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2lax"]
@@ -40,9 +37,6 @@ script = ExtResource("4_ed40h")
 [node name="DirectMoveCommand" type="Node" parent="."]
 script = ExtResource("5_s2myd")
 
-[node name="MovementVisualizer" type="Node" parent="."]
-script = ExtResource("6_6ts5a")
-
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("7_k0pgh")
 
@@ -52,14 +46,8 @@ offset_top = -48.0
 offset_right = 12.0
 offset_bottom = -46.0
 
-[node name="FogRevealComponent" type="Node2D" parent="."]
-script = ExtResource("9_tvdxp")
-
 [node name="AbilityManager" type="Node" parent="."]
 script = ExtResource("10_7tn8r")
-
-[node name="AbilityVisualizer" type="Node" parent="."]
-script = ExtResource("11_vqffl")
 
 [node name="AbilityComponent" type="Node" parent="."]
 script = ExtResource("12_6flqq")
