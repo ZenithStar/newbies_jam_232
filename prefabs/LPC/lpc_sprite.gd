@@ -1,23 +1,43 @@
+@tool
 class_name LPCSprite2D extends Sprite2D
 
 @export var fps: float = 10.0
 @onready var frame_time: float = 0.0
-func process_frame_coord_y():
+@export var current_frame: int = 0
+@onready var num_extra_animations: int = 0 ## The number extra sets of 128x128px animations
+
+func _ready():
+	region_enabled = true
+	region_filter_clip_enabled = true
+	texture_changed.connect(process_texture_dimensions)
+	process_texture_dimensions()
+	process_frame_coord()
+	
+func process_texture_dimensions():
+	if texture:
+		num_extra_animations = ((texture.get_size().x / 64) - 21 ) / 2
+func process_frame_dimensions():
+	if animation >= AnimationState.EXTRA_WALK:
+		pass
+func process_frame_coord():
 	match animation:
+		AnimationState.EXTRA_WALK, AnimationState.EXTRA_ATTACK:
+			region_rect.size = Vector2i(128,128)
+			region_rect.position.y = 21*64 + (animation - AnimationState.EXTRA_WALK)*4*128 + direction*128
+		AnimationState.EXTRA_STAND:
+			region_rect.size = Vector2i(128,128)
+			region_rect.position.y = 21*64 + direction*128
 		AnimationState.STAND:
-			frame_coords.y = direction_offset
+			region_rect.size = Vector2i(64,64)
+			region_rect.position.y = direction*64
 		AnimationState.HURT:
-			frame_coords.y = animation_offset * 4
+			region_rect.size = Vector2i(64,64)
+			region_rect.position.y = animation*64 * 4
 		_:
-			frame_coords.y = direction_offset + animation_offset * 4
-@export var animation_offset: int = -1:
-	get:
-		return animation_offset
-	set(value):
-		if animation_offset != value:
-			frame_time = 0.0
-			animation_offset = value
-			process_frame_coord_y()
+			region_rect.size = Vector2i(64,64)
+			region_rect.position.y = direction*64 + animation*64 * 4
+
+
 enum AnimationState {
 	CAST = 0,
 	STAB = 1,
@@ -25,19 +45,19 @@ enum AnimationState {
 	SLASH = 3,
 	SHOOT = 4,
 	HURT = 5,
-	STAND = -1
+	EXTRA_WALK = 6,
+	EXTRA_ATTACK = 7,
+	STAND = -1,
+	EXTRA_STAND = -2
 }
 @export var animation: AnimationState = AnimationState.STAND:
 	get:
-		return animation_offset as AnimationState
+		return animation
 	set(value):
-		animation_offset = value
-@export var direction_offset: int = 2:
-	get:
-		return direction_offset
-	set(value):
-		direction_offset = value
-		process_frame_coord_y()
+		if animation != value:
+			frame_time = 0.0
+			animation = value
+			process_frame_coord()
 enum DirectionState {
 	UP = 0,
 	LEFT = 1,
@@ -46,9 +66,10 @@ enum DirectionState {
 }
 @export var direction: DirectionState = DirectionState.DOWN:
 	get:
-		return direction_offset as DirectionState
+		return direction
 	set(value):
-		direction_offset = value
+		direction = value
+		process_frame_coord()
 var NUM_FRAMES: Dictionary = {
 	AnimationState.CAST: 7,
 	AnimationState.STAB: 8,
@@ -57,6 +78,9 @@ var NUM_FRAMES: Dictionary = {
 	AnimationState.SHOOT: 13,
 	AnimationState.HURT: 6,
 	AnimationState.STAND: 1,
+	AnimationState.EXTRA_STAND: 1,
+	AnimationState.EXTRA_WALK: 9,
+	AnimationState.EXTRA_ATTACK: 6,
 }
 
 func _physics_process(_delta):
@@ -73,12 +97,16 @@ func _physics_process(_delta):
 			direction = DirectionState.UP
 		if animation == AnimationState.STAND:
 			animation = AnimationState.WALK
+		elif animation == AnimationState.EXTRA_STAND:
+			animation = AnimationState.EXTRA_WALK
 	else:
 		if animation == AnimationState.WALK:
 			animation = AnimationState.STAND
+		elif animation == AnimationState.EXTRA_WALK:
+			animation = AnimationState.EXTRA_STAND
 
 func _process(delta):
 	var loop_duration = NUM_FRAMES[animation] / fps
 	frame_time += delta
-	frame_coords.x = int(frame_time * fps) % NUM_FRAMES[animation]
+	region_rect.position.x = (int(frame_time * fps) % NUM_FRAMES[animation]) * region_rect.size.x
 	frame_time = fmod(frame_time, loop_duration)

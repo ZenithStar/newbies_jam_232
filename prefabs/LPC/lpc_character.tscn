@@ -18,11 +18,8 @@ motion_mode = 1
 
 [node name="LPCSprite2D" type="Sprite2D" parent="."]
 use_parent_material = true
-position = Vector2(0, -19)
+position = Vector2(0, -18)
 texture = ExtResource("1_jvesq")
-hframes = 13
-vframes = 21
-frame = 130
 script = ExtResource("2_t2vp0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

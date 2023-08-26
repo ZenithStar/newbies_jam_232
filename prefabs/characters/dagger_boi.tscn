@@ -7,3 +7,5 @@
 
 [node name="LPCSprite2D" parent="." index="0"]
 texture = ExtResource("2_awmud")
+region_enabled = true
+region_filter_clip_enabled = true
