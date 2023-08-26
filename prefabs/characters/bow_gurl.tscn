@@ -7,7 +7,4 @@
 
 [node name="LPCSprite2D" parent="." index="0"]
 texture = ExtResource("2_jpkl0")
-region_enabled = true
-region_rect = Rect2(0, 1600, 128, 128)
-region_filter_clip_enabled = true
 animation = -2

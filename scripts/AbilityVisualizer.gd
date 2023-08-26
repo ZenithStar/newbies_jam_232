@@ -31,6 +31,7 @@ func start():
 	
 	var headOverlay:Sprite2D = get_parent().find_child("LPCSprite2D").duplicate(1)
 	headOverlay.set_script(null)
+	headOverlay.region_rect = Rect2(0,128,64,64)
 	abilityVisualizationContainer.get_child(0).add_child(headOverlay)
 	headOverlay.vframes = headOverlay.vframes*2
 	headOverlay.frame_coords = Vector2i(0,20)
