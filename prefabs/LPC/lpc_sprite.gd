@@ -3,13 +3,33 @@ class_name LPCSprite2D extends Sprite2D
 
 @export var fps: float = 10.0
 @onready var frame_time: float = 0.0
-@export var current_frame: int = 0
-@onready var num_extra_animations: int = 0 ## The number extra sets of 128x128px animations
-
+@export var current_frame: int = 0:
+	get:
+		return current_frame
+	set(value):
+		current_frame = value
+		region_rect.position.x = current_frame * region_rect.size.x
+var animation_player: AnimationPlayer
+class LPCAnimation:
+	var name: String
+	var frames: int
+	var loop: bool
+	func _init(_name, _frames, _loop=false):
+		name = _name
+		frames = _frames
+		loop = _loop
+var animation_library_prefix:StringName = "lpc_sprite"
 func _ready():
 	region_enabled = true
 	region_filter_clip_enabled = true
 	process_frame_coord()
+	var player = AnimationPlayer.new()
+	player.add_animation_library(animation_library_prefix,generate_animation_library())
+	animation_player = player
+	var old_player = find_child("AnimationPlayer")
+	if old_player:
+		old_player.queue_free()
+	add_child.call_deferred(player)
 	
 func process_frame_coord():
 	match animation:
@@ -50,6 +70,8 @@ enum AnimationState {
 			frame_time = 0.0
 			animation = value
 			process_frame_coord()
+			if animation_player:
+				animation_player.play(animation_library_prefix+"/"+animation_properties[value].name)
 enum DirectionState {
 	UP = 0,
 	LEFT = 1,
@@ -62,18 +84,30 @@ enum DirectionState {
 	set(value):
 		direction = value
 		process_frame_coord()
-var NUM_FRAMES: Dictionary = {
-	AnimationState.CAST: 7,
-	AnimationState.STAB: 8,
-	AnimationState.WALK: 9,
-	AnimationState.SLASH: 6,
-	AnimationState.SHOOT: 13,
-	AnimationState.HURT: 6,
-	AnimationState.STAND: 1,
-	AnimationState.EXTRA_STAND: 1,
-	AnimationState.EXTRA_WALK: 9,
-	AnimationState.EXTRA_ATTACK: 6,
+var animation_properties: Dictionary = {
+	AnimationState.CAST: LPCAnimation.new("cast",7),
+	AnimationState.STAB: LPCAnimation.new("stab",8),
+	AnimationState.WALK: LPCAnimation.new("walk",9, true),
+	AnimationState.SLASH: LPCAnimation.new("slash",6),
+	AnimationState.SHOOT: LPCAnimation.new("shoot",13),
+	AnimationState.HURT: LPCAnimation.new("hurt",6),
+	AnimationState.STAND: LPCAnimation.new("stand",1),
+	AnimationState.EXTRA_STAND: LPCAnimation.new("extra_stand",1),
+	AnimationState.EXTRA_WALK: LPCAnimation.new("extra_walk",9, true),
+	AnimationState.EXTRA_ATTACK: LPCAnimation.new("extra_attack",6),
 }
+func generate_animation_library() -> AnimationLibrary:
+	var library = AnimationLibrary.new()
+	for key in animation_properties:
+		var ani = Animation.new()
+		ani.loop_mode = Animation.LOOP_LINEAR if animation_properties[key].loop else Animation.LOOP_NONE
+		ani.length = animation_properties[key].frames / fps
+		ani.add_track(Animation.TYPE_VALUE)
+		ani.track_set_path(0,NodePath(String(get_path())+":current_frame"))
+		ani.track_insert_key(0,0.0,0)
+		ani.track_insert_key(0,ani.length,animation_properties[key].frames)
+		library.add_animation(animation_properties[key].name,ani)
+	return library
 
 func _physics_process(_delta):
 	var this_velocity = $"..".get_real_velocity()
@@ -96,9 +130,3 @@ func _physics_process(_delta):
 			animation = AnimationState.STAND
 		elif animation == AnimationState.EXTRA_WALK:
 			animation = AnimationState.EXTRA_STAND
-
-func _process(delta):
-	var loop_duration = NUM_FRAMES[animation] / fps
-	frame_time += delta
-	region_rect.position.x = (int(frame_time * fps) % NUM_FRAMES[animation]) * region_rect.size.x
-	frame_time = fmod(frame_time, loop_duration)

@@ -3,3 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dpke07eh0o6fo" path="res://prefabs/LPC/lpc_character.tscn" id="1_t30pn"]
 
 [node name="Nonplayable Character" instance=ExtResource("1_t30pn")]
+
+[node name="LPCSprite2D" parent="." index="0"]
+region_enabled = true
+region_rect = Rect2(0, 128, 64, 64)
+region_filter_clip_enabled = true
