@@ -20,6 +20,9 @@ motion_mode = 1
 use_parent_material = true
 position = Vector2(0, -18)
 texture = ExtResource("1_jvesq")
+region_enabled = true
+region_rect = Rect2(0, 128, 64, 64)
+region_filter_clip_enabled = true
 script = ExtResource("2_t2vp0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
