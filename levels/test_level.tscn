@@ -25,22 +25,34 @@ y_sort_enabled = true
 position = Vector2(150, 0)
 
 [node name="Dagger Boi" parent="Entities" instance=ExtResource("9_ar30c")]
-position = Vector2(-146.412, -95.8436)
+position = Vector2(-146.412, -124.237)
 
 [node name="Bow Gurl" parent="Entities" instance=ExtResource("10_to4tw")]
-position = Vector2(-192, -120)
+position = Vector2(-192, -280.38)
 
 [node name="Dagger Boi2" parent="Entities" instance=ExtResource("9_ar30c")]
-position = Vector2(-300.619, -52.4284)
+position = Vector2(-79.412, -152.139)
 
 [node name="Bow Gurl2" parent="Entities" instance=ExtResource("10_to4tw")]
-position = Vector2(-337, -76.076)
+position = Vector2(-125, -305.076)
 
 [node name="Dagger Boi3" parent="Entities" instance=ExtResource("9_ar30c")]
-position = Vector2(-496.619, 94.6476)
+position = Vector2(-112.412, -62.5615)
 
 [node name="Bow Gurl3" parent="Entities" instance=ExtResource("10_to4tw")]
-position = Vector2(-533, 71)
+position = Vector2(-158, -219)
+
+[node name="Dagger Boi4" parent="Entities" instance=ExtResource("9_ar30c")]
+position = Vector2(-168.113, -72.2226)
+
+[node name="Bow Gurl4" parent="Entities" instance=ExtResource("10_to4tw")]
+position = Vector2(-223.951, -181.321)
+
+[node name="Dagger Boi5" parent="Entities" instance=ExtResource("9_ar30c")]
+position = Vector2(-222.412, -106.125)
+
+[node name="Bow Gurl5" parent="Entities" instance=ExtResource("10_to4tw")]
+position = Vector2(-268, -235)
 
 [node name="LizzyBoi" parent="Entities" instance=ExtResource("8_bsj81")]
 
@@ -63,3 +75,6 @@ offset_right = 575.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+
+[node name="FormationVisualizationLayer" type="CanvasLayer" parent="."]
+layer = 13

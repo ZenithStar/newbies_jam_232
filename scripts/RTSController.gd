@@ -71,23 +71,42 @@ func complete_selection():
 @onready var formation: Dictionary = {}
 enum Formation {
 	USE_CURRENT,
+	CIRCLE,
 	LINE,
 	HEX_FILL
 }
-@export var formation_style: Formation = Formation.USE_CURRENT
+@export var formation_style: Formation = Formation.CIRCLE
 @export var formation_unit_seperation: float = 50.0
 func calculate_formation():
 	formation = {}
+	if active_selection.size() == 0: return
+	var center: Vector2 = selection_center(active_selection)
+	
 	match formation_style:
 		Formation.USE_CURRENT:
-			var center: Vector2 = Vector2.ZERO
-			for body in active_selection:
-				center += body.global_position
-			center /= active_selection.size()
 			for body in active_selection:
 				formation[body] = body.global_position - center
+		
+		Formation.CIRCLE:
+			var circleSize = active_selection.size() * 13
+			var offsetPerBody = 360 / active_selection.size()
+			var offsetFromCenter = Vector2.UP * circleSize 
+			for body in active_selection:
+				formation[body] = offsetFromCenter #body.global_position - (center )
+				offsetFromCenter = offsetFromCenter.rotated(deg_to_rad(offsetPerBody))
+			
+			
+		
 		Formation.LINE: # TODO
 			pass
+
+func selection_center(unit_selection:Array[Node2D])->Vector2:
+	var selectionCenter:Vector2 = Vector2.ZERO
+	for body in unit_selection:
+		selectionCenter += body.global_position
+	selectionCenter /= unit_selection.size()
+	
+	return selectionCenter
 
 
 @onready var active_command: String = ""
