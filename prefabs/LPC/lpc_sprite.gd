@@ -22,6 +22,8 @@ var animation_library_prefix:StringName = "lpc_sprite"
 func _ready():
 	region_enabled = true
 	region_filter_clip_enabled = true
+	calculate_available_animations()
+	texture_changed.connect(calculate_available_animations)
 	process_frame_coord()
 	var player = AnimationPlayer.new()
 	player.add_animation_library(animation_library_prefix,generate_animation_library())
@@ -30,6 +32,10 @@ func _ready():
 	if old_player:
 		old_player.queue_free()
 	add_child.call_deferred(player)
+var num_extra_animations: int = 0
+func calculate_available_animations():
+	if texture:
+		num_extra_animations = ( texture.get_size().y - (21 * 64) ) / 4 / 128
 	
 func process_frame_coord():
 	match animation:
@@ -68,10 +74,21 @@ enum AnimationState {
 	set(value):
 		if animation != value:
 			frame_time = 0.0
-			animation = value
+			match value:
+				AnimationState.STAND, AnimationState.EXTRA_STAND:
+					animation = AnimationState.EXTRA_STAND if num_extra_animations >= 1 else AnimationState.STAND
+				AnimationState.WALK, AnimationState.EXTRA_WALK:
+					animation = AnimationState.EXTRA_WALK if num_extra_animations >= 1 else AnimationState.WALK
+				AnimationState.STAB, AnimationState.SLASH, AnimationState.SHOOT:
+					animation = AnimationState.EXTRA_ATTACK if num_extra_animations >= 2 else value
+				_:
+					animation = value
 			process_frame_coord()
 			if animation_player:
-				animation_player.play(animation_library_prefix+"/"+animation_properties[value].name)
+				if animation in animation_properties:
+					animation_player.play(animation_library_prefix+"/"+animation_properties[animation].name)
+				else:
+					printerr(get_parent().name," animation set to invalid value: ", animation)
 enum DirectionState {
 	UP = 0,
 	LEFT = 1,
@@ -106,6 +123,10 @@ func generate_animation_library() -> AnimationLibrary:
 		ani.track_set_path(0,NodePath(String(get_path())+":current_frame"))
 		ani.track_insert_key(0,0.0,0)
 		ani.track_insert_key(0,ani.length,animation_properties[key].frames)
+		if not animation_properties[key].loop:
+			ani.add_track(Animation.TYPE_VALUE)
+			ani.track_set_path(1,NodePath(String(get_path())+":animation"))
+			ani.track_insert_key(1,ani.length,animation_properties[key].frames)
 		library.add_animation(animation_properties[key].name,ani)
 	return library
 

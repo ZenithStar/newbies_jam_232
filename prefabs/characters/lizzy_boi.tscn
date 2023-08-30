@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://ceban5ocm4vlp" path="res://assets/Character Sheets/lizzy_boi.png" id="2_lrjus"]
 
 [node name="LizzyBoi" instance=ExtResource("1_5bipm")]
+position = Vector2(0, 0)
 
 [node name="LPCSprite2D" parent="." index="0"]
 texture = ExtResource("2_lrjus")
-region_rect = Rect2(0, 1600, 128, 128)
-animation = -2
+region_rect = Rect2(64, 128, 64, 64)
+direction = 2
